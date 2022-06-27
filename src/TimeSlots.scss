@@ -1,0 +1,30 @@
+@use "./colors";
+
+.time-slots {
+  &__selected {
+    border: 1px solid colors.$primary;
+    outline: 1px solid colors.$primary;
+    color: colors.$primary;
+    padding: 4px;
+    margin-bottom: 24px;
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    &:empty {
+      background: colors.$bg-inactive;
+      border: 1px solid colors.$border;
+      outline-color: transparent;
+    }
+  }
+
+  &__day-of-week {
+    margin-top: 16px;
+  }
+
+  &__date {
+    margin: 4px 0 8px;
+  }
+}

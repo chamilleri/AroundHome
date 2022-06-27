@@ -1,0 +1,18 @@
+@use "./colors";
+
+.time-slot {
+  padding: 4px;
+  border: 1px solid colors.$border;
+  margin: 2px 0;
+  cursor: pointer;
+  
+  &--disabled {
+    color: colors.$txt-disabled;
+    pointer-events: none;
+    background: colors.$bg-inactive;
+  }
+
+  &--selected {
+    background: colors.$accent;
+  }
+}
