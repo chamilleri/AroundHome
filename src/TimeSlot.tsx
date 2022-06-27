@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { TimeSlot as TimeSlotType } from "./CompanyTimeSlots";
+import { getTimeSlotTime } from "./utils/TimeSlotUtils";
 import "./TimeSlot.scss";
-import { getTimeSlotTime } from "./utils";
 
 type TimeSlotProps = {
   slot: TimeSlotType;
@@ -24,7 +24,7 @@ export const TimeSlot = ({
       })}
       onClick={() => onClick(slot)}
     >
-      {getTimeSlotTime(new Date(slot.start_time), new Date(slot.end_time))}
+      {getTimeSlotTime(slot)}
     </div>
   );
 };

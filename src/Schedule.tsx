@@ -6,13 +6,14 @@ import {
   getCompanyTimeSlots
 } from "./CompanyTimeSlots";
 import { useState } from "react";
+import { isSameTimeSlot } from "./utils/TimeSlotUtils";
 
 type SelectedTimeSlot = {
   companyId: number;
   slot: TimeSlotType;
 };
 
-export default function Schedule() {
+export const Schedule = () => {
   const companyTimeSlots = getCompanyTimeSlots();
   const [selectedSlots, setSelectedSlots] = useState<SelectedTimeSlot[]>([]);
 
@@ -22,6 +23,7 @@ export default function Schedule() {
         return (
           <div key={"comp" + company.id} className="schedule__company">
             <div className="schedule__company-name">{company.name}</div>
+
             <TimeSlots
               timeSlots={company.time_slots}
               occupiedSlots={selectedSlots.map((s) => s.slot)}
@@ -31,7 +33,7 @@ export default function Schedule() {
                   selectedSlots.filter(
                     (s) =>
                       s.companyId === newSlot.companyId &&
-                      s.slot === newSlot.slot
+                      isSameTimeSlot(s.slot, newSlot.slot)
                   ).length > 0;
                 setSelectedSlots([
                   ...(removeSlot ? [] : [newSlot]),
@@ -44,4 +46,6 @@ export default function Schedule() {
       })}
     </div>
   );
-}
+};
+
+export default Schedule;

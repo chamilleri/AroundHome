@@ -1,8 +1,8 @@
 import timeSlots from "./time_slots.json";
 
 export type TimeSlot = {
-  start_time: string;
-  end_time: string;
+  start_time: Date;
+  end_time: Date;
 };
 
 export type CompanyTimeSlots = {
@@ -14,5 +14,16 @@ export type CompanyTimeSlots = {
 
 // Function to fetch data from API
 export const getCompanyTimeSlots = (): CompanyTimeSlots[] => {
-  return timeSlots;
+  //mapping timestamp to Date ease of use in the app
+  return timeSlots.map(({ time_slots, ...rest }) => {
+    return {
+      ...rest,
+      time_slots: time_slots.map((timeSlot) => {
+        return {
+          start_time: new Date(timeSlot.start_time),
+          end_time: new Date(timeSlot.end_time)
+        };
+      })
+    };
+  });
 };
